@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <p>Author: {{blog.author}}</p>
+        <p>Title: {{blog.title}}</p>
+        <p>Text: {{blog.text}}</p>
+        <p>Current likes: {{blog.likes}}</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="like">Like</label>
+            <input type="submit" name="like" id="like">
+        </form>
+    </div>
+</body>
+</html>

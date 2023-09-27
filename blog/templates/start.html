@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="http://127.0.0.1:8000/create_blog">Create</a>
+    {% for blog in blogs%}
+        <div>
+            <a href=" {{ blog.get_absolute_url }} ">{{blog.title}}</a><p>{{blog.author}}, {{blog.id}}</p>
+        </div>
+    {% endfor %}
+
+</body>
+</html>
