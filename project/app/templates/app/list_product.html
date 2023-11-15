@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="get">
+        {{ filter.as_p }}
+        <input type="submit" value="Submit">
+    </form><br>
+    {% for product in filter.qs %}
+    <p>{{ product }}</p>
+    <div>
+        {% for products in product %}
+            <img src="{{ products.photo.url }}"><br>
+            <p>{{ products.title }}</p>
+            <p>{{ products.text }}</p>
+            <p>{{ products.price }}$</p>
+            <p>{{ products.categories }}$</p>
+            {% if user.username == admin %}
+                <p><a href="{% url 'update' products.slug %}">Update Product</a></p><br>
+            {% endif %}
+            <br>
+        {% endfor %}
+    </div>
+</body>
+</html>
