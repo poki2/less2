@@ -1,0 +1,9 @@
+
+{% extends 'app_admin/base.html' %}
+
+{% block content %}
+  <h2>Motherboard Detail</h2>
+  <p>Name: {{ motherboards.brand }}</p>
+  <p>Manufacturer: {{ motherboards.model }}</p>
+  <p>Price: {{ motherboards.price }}</p>
+{% endblock %}

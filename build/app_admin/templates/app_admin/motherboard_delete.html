@@ -1,0 +1,12 @@
+
+{% extends 'app_admin/base.html' %}
+
+{% block content %}
+  <h2>Delete Motherboard</h2>
+  <p>Are you sure you want to delete {{ motherboard.name }}?</p>
+  <form method="post" action="{% url 'delete' %}">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'motherboard' %}">No, cancel</a>
+  </form>
+{% endblock %}

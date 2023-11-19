@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список процессоров</title>
+</head>
+<body>
+    <h1>Список процессоров</h1>
+
+    {% if processors %}
+        <ul>
+            {% for processor in processors %}
+                <li>
+                    <strong>{{ processor.brand }} {{ processor.model }}</strong><br>
+                    Сокет: {{ processor.socket }}<br>
+                    Количество ядер: {{ processor.cores }}<br>
+                    Частота: {{ processor.frequency }} GHz<br>
+                    Кэш-память: {{ processor.cache }}<br>
+                    Цена: ${{ processor.price }}<br>
+                    {% if processor.in_stock %}
+                        В наличии<br>
+                    {% else %}
+                        Нет в наличии
+                    {% endif %}<br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет доступных процессоров.</p><br>
+    {% endif %}
+</body>
+</html>

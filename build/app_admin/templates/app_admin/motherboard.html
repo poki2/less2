@@ -1,0 +1,32 @@
+{% extends 'app_admin/base.html' %}
+
+{% block title %}Список материнских плат{% endblock %}
+
+{% block content %}
+    <h1>Список материнских плат</h1>
+
+    {% if motherboards %}
+        <ul>
+            {% for motherboard in motherboards %}
+                <li><a href="{% url 'detail' %}">
+                    <strong>{{ motherboard.brand }} {{ motherboard.model }}</strong><br>
+                    Чипсет: {{ motherboard.chipset }}<br>
+                    Сокет: {{ motherboard.socket }}<br>
+                    Цена: ${{ motherboard.price }}<br>
+                    {% if motherboard.in_stock %}
+                        В наличии
+                    {% else %}
+                        Нет в наличии
+                    {% endif %}
+
+                </a></li>
+                        <p><a href="{% url 'delete' slug=motherboards.slug %}">DELETE</a></p>
+                        <p><a href="{% url 'create' %}">CREATE</a></p>
+                        <p><a href="{% url 'update' slug=motherboards.slug %}">UPDATE</a></p>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>Нет доступных материнских плат.</p>
+    {% endif %}
+{% endblock %}
