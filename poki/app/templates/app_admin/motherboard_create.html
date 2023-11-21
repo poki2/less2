@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motherboard Create</title>
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+        width: 50%;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .motherboard-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    input,
+    select {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button {
+        background: #1e90ff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>{% if form.instance.pk %}Update{% else %}Create{% endif %} Motherboard</h2>
+    <form method="post" enctype="multipart/form-data" class="motherboard-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+</body>
+</html>
+

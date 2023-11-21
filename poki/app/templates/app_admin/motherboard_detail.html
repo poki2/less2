@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motherboard Detail</title>
+    <style>
+       body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .details-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .details-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .details-container p {
+            margin: 10px 0;
+        }
+
+        .details-container a {
+            display: inline-block;
+            background: #1e90ff;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .details-container a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Motherboard Detail</h2>
+
+    <div class="details-container">
+        <img src="{{ motherboard.img.url }}" alt="{{ motherboard.brand }}">
+        <p>Чипсет: {{ motherboard.chipset }}</p>
+        <p>Сокет: {{ motherboard.socket }}</p>
+        <p>Цена: ${{ motherboard.price }}</p>
+
+        {% if motherboard.in_stock %}
+            <p>В наличии</p>
+        {% else %}
+            <p>Нет в наличии</p>
+        {% endif %}
+
+        <p><a href="{% url 'delete' pk=motherboard.pk %}">DELETE</a></p>
+        <p><a href="{% url 'update' pk=motherboard.pk %}">UPDATE</a></p>
+    </div>
+</div>
+
+</body>
+</html>
+

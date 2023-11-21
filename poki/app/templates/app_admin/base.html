@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumaPc</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>LumaPc</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'motherboard' %}">Материнские платы</a></li>
+            <li><a href="#">Процессор</a></li>
+            <li><a href="#">HDD</a></li>
+            <li><a href="#">SSD</a></li>
+            <li><a href="#">Корпус</a></li>
+            <li><a href="#">Видео карта</a></li>
+            <li><a href="#">Кулера</a></li>
+            <li><a href="#">Блок питания</a></li>
+            <li><a href="#">Опиративная память</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div>
+    {% if latest_product %}
+        <p>{{ latest_product.name }}</p>
+
+    {% else %}
+        <p>Нет доступных продуктов.</p>
+    {% endif %}
+</div>
+
+<footer>
+    <p>&copy; 2023 LumaPc</p>
+</footer>
+
+</body>
+</html>
