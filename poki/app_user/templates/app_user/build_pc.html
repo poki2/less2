@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your PC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        p {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Сборка ПК</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="motherboard">Выберите материнскую плату:</label>
+    <select name="motherboard" id="motherboard">
+        {% for motherboard in motherboards %}
+            <option value="{{ motherboard.id }}">{{ motherboard.brand }} {{ motherboard.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="processor">Выберите Процессор:</label>
+    <select name="processor" id="processor">
+        {% for processor in processors %}
+            <option value="{{ processor.id }}">{{ processor.brand }} {{ processor.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="ram">Выберите Оперативную память:</label>
+    <select name="ram" id="ram">
+        {% for ram in rams %}
+            <option value="{{ ram.id }}">{{ ram.brand }} {{ ram.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="hdd">Выберите HDD:</label>
+    <select name="hdd" id="hdd">
+        {% for hdd in hdds %}
+            <option value="{{ hdd.id }}">{{ hdd.brand }} {{ hdd.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="ssd">Выберите SSD:</label>
+    <select name="ssd" id="ssd">
+        {% for ssd in ssds %}
+            <option value="{{ ssd.id }}">{{ ssd.brand }} {{ ssd.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="graphic_card">Выберите Видео карту:</label>
+    <select name="graphic_card" id="graphic_card">
+        {% for graphic_card in graphics_cards %}
+            <option value="{{ graphic_card.id }}">{{ graphic_card.brand }} {{ graphic_card.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="cooler">Выберите Кулера:</label>
+    <select name="cooler" id="cooler">
+        {% for cooler in coolers %}
+            <option value="{{ cooler.id }}">{{ cooler.brand }} {{ cooler.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="power_supplie">Выберите Блок питания:</label>
+    <select name="power_supplie" id="power_supplie">
+        {% for power_supplie in power_supplies %}
+            <option value="{{ power_supplie.id }}">{{ power_supplie.brand }} {{ power_supplie.model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="computer_case">Выберите Кейс:</label>
+    <select name="computer_case" id="computer_case">
+        {% for computer_case in computer_cases %}
+            <option value="{{ computer_case.id }}">{{ computer_case.brand }} {{ computer_case.model }}</option>
+        {% endfor %}
+    </select>
+
+
+
+    <button type="submit">Собрать ПК</button>
+</form>
+
+{% if selected_motherboard %}
+    <h2>Информация о собранном ПК:</h2>
+    <p>{{ selected_motherboard }}</p>
+    <p>{{ selected_processor }}</p>
+    <p>{{ selected_ram }}</p>
+    <p>{{ selected_ssd }}</p>
+    <p>{{ selected_hdd }}</p>
+    <p>{{ selected_graphics_card }}</p>
+    <p>{{ selected_cooler }}</p>
+    <p>{{ selected_power_supply }}</p>
+    <p>{{ selected_computer_case }}</p>
+{% endif %}
+
+</body>
+</html>
+

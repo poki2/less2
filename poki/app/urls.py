@@ -8,5 +8,6 @@ urlpatterns = [
     path('delete/<int:pk>/', MotherboardDeleteView.as_view(), name='delete'),
     path('create/', MotherboardCreateView.as_view(), name='create'),
     path('update/<int:pk>/', MotherboardUpdateView.as_view(), name='update'),
-    path('detail/<int:pk>/', MotherboardDetailView.as_view(), name='detail')
+    path('detail/<int:pk>/', MotherboardDetailView.as_view(), name='detail'),
+
 ]

@@ -103,6 +103,11 @@
             height: auto;
             margin-bottom: 10px;
         }
+        {% if user.is_authenticated %}
+            .login-register {
+            display: none;
+            }
+        {% endif %}
     </style>
 </head>
 <body>
@@ -122,11 +127,17 @@
             <li><a href="#">Оперативная память</a></li>
         </ul>
     </nav>
+    <div class="login-register">
+        <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Registration</a></li>
+    </div>
+
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    {% endif %}
 </header>
 
 <main>
-
-
     <div class="random-products">
         {% for product in random_products %}
             <div class="product-card">
@@ -134,7 +145,6 @@
                 <p>{{ product.name }}</p>
                 <p>{{ product.description }}</p>
                 <p>Цена: ${{ product.price }}</p>
-                {% comment %} Добавьте ссылку на детали продукта, замените 'detail' на ваш URL {% endcomment %}
                 <p><a href="{% url 'detail' pk=product.pk %}">Подробнее</a></p>
             </div>
         {% endfor %}
