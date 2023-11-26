@@ -125,23 +125,25 @@
             <li><a href="#">Кулера</a></li>
             <li><a href="#">Блок питания</a></li>
             <li><a href="#">Оперативная память</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="{% url 'profile_detail' pk=profiles.pk %}"><i class="fas fa-sign-out-alt"></i> profile_detail</a></li>
+            {% else %}
+                <div class="login-register">
+                    <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Registration</a></li>
+                </div>
+            {% endif %}
         </ul>
     </nav>
-    <div class="login-register">
-        <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-        <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Registration</a></li>
-    </div>
-
-    {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    {% endif %}
 </header>
 
 <main>
     <div class="random-products">
         {% for product in random_products %}
             <div class="product-card">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <img src="{{ product.photo.url }}" alt="{{ product.name }}">
                 <p>{{ product.name }}</p>
                 <p>{{ product.description }}</p>
                 <p>Цена: ${{ product.price }}</p>

@@ -1,8 +1,10 @@
-from django.contrib.auth import logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+import self as self
+from django.contrib.auth import logout, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
+from django.shortcuts import render, redirect
 # Create your views here.
 
 
@@ -11,6 +13,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
 from app.models import *
+from app_user.form import RegistrationForm, LoginForm, OrderForm
+from app_user.models import CustomUser, Order, CartItem, Cart
 
 
 def build_pc(request):
@@ -46,8 +50,6 @@ def build_pc(request):
         selected_power_supplie_id = request.POST.get('power_supplie', None)
         selected_computer_case_id = request.POST.get('computer_cases', None)
 
-
-
         selected_motherboard = Motherboard.objects.get(pk=selected_motherboard_id)
         selected_processor = Processor.objects.get(pk=selected_processor_id)
         selected_ram = RAM.objects.get(pk=selected_ram_id)
@@ -56,8 +58,6 @@ def build_pc(request):
         selected_cooler = Cooler.objects.get(pk=selected_cooler_id)
         selected_power_supplie = PowerSupply.objects.get(pk=selected_power_supplie_id)
         selected_computer_case = ComputerCase.objects.get(pk=selected_computer_case_id)
-
-
 
         if selected_motherboard.socket != selected_processor.socket:
             context['compatibility_error'] = 'Материнская плата и процессор не совместимы.'
@@ -72,41 +72,39 @@ def build_pc(request):
             context['selected_power_supplie'] = selected_power_supplie.get_component_info()
             context['selected_computer_case'] = selected_computer_case.get_component_info()
 
-
-
     return render(request, 'app_user/build_pc.html', context)
+
 
 import random as std_random
 
 
 def start_page(request):
-        all_motherboards = Motherboard.objects.all()
-        all_processors = Processor.objects.all()
-        all_powersupply= PowerSupply.objects.all()
-        all_ram = RAM.objects.all()
-        all_ssd = SSD.objects.all()
-        all_hdd = HDD.objects.all()
-        all_cooler = Cooler.objects.all()
-        all_case = ComputerCase.objects.all()
-        all_graphiccart = GraphicsCard.objects.all()
+    all_motherboards = Motherboard.objects.all()
+    all_processors = Processor.objects.all()
+    all_powersupply = PowerSupply.objects.all()
+    all_ram = RAM.objects.all()
+    all_ssd = SSD.objects.all()
+    all_hdd = HDD.objects.all()
+    all_cooler = Cooler.objects.all()
+    all_case = ComputerCase.objects.all()
+    all_graphiccart = GraphicsCard.objects.all()
 
-        all_products = list(all_motherboards) + list(all_processors) + list(all_powersupply) + list(all_ssd) + list(all_graphiccart) + list(all_case) + list(all_hdd) + list(all_cooler) + list(all_ram)
+    all_products = list(all_motherboards)
 
-        random_products = std_random.sample(all_products, 11)
-        context = {'random_products': random_products}
-        return render(request, 'app_user/start.html', context)
-
+    random_products = std_random.sample(all_products, 3)
+    context = {'random_products': random_products}
+    return render(request, 'app_user/start.html', context)
 
 
 class Login(LoginView):
     template_name = 'app_user/login.html'
-    form_class = AuthenticationForm
+    form_class = LoginForm
     next_page = reverse_lazy('start')
 
 
 class RegisterView(CreateView):
     template_name = 'app_user/register.html'
-    form_class = UserCreationForm
+    form_class = RegistrationForm
     success_url = reverse_lazy('login')
 
 
@@ -117,11 +115,32 @@ def logout_user(request):
 
 class MotherboardListView(ListView):
     model = Motherboard
-    template_name = 'app_user/motherboard.html'
+    template_name = 'app/motherboard.html'
     context_object_name = 'motherboards'
 
 
 class MotherboardDetailView(DetailView):
     model = Motherboard
-    template_name = 'app_user/motherboard_detail.html'
+    template_name = 'app/motherboard_detail.html'
     context_object_name = 'motherboard'
+
+
+class OrderCreateView(CreateView):
+    model = Order
+    form_class = OrderForm
+    template_name = 'app_user/order.html'
+    success_url = reverse_lazy('order_confirmation')
+
+
+
+
+class OrderConfirmationView(DetailView):
+    model = Order
+    template_name = 'app_user/order_confirmation.html'
+    context_object_name = 'order'
+
+
+class ProfileDetail(DetailView):
+    model = CustomUser
+    template_name = 'app_user/profile_detail.html'
+    context_object_name = 'profiles'

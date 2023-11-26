@@ -44,14 +44,20 @@
         input[type="submit"]:hover {
             background-color: #2980b9;
         }
+        .helptext {
+    display: none;
+}
 
     </style>
 </head>
 <body>
-    <form method="POST">
-        {% csrf_token %}
+<form method="POST">
+    {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Register">
-    </form>
+
+
+
+</form>
 </body>
 </html>

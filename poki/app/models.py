@@ -1,22 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.text import slugify
+
 
 # Create your models here.
-
-
-
-
-
-
-# class CustomUser(AbstractUser):
-#     username = models.CharField(max_length=255)
-#     email = models.EmailField(unique=True)
-#     password = models.CharField(max_length=255)
-#
-#     USERNAME_FIELD = 'email'
-#     REQUIRED_FIELDS = []
-
 
 class Motherboard(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
@@ -32,15 +18,10 @@ class Motherboard(models.Model):
     def __str__(self):
         return f"{self.brand} {self.model}"
 
-
-
-    def get_component_info(self):
-        return f"Материнская плата: {self.brand} {self.model}, Чипсет: {self.chipset}, Сокет: {self.socket}, Цена: {self.price}$"
-
-
     class Meta:
         verbose_name = 'Материнская плата'
         verbose_name_plural = 'Материнские платы'
+        get_latest_by = 'id'
 
 
 
@@ -63,11 +44,6 @@ class Processor(models.Model):
         verbose_name = 'Процессор'
         verbose_name_plural = 'Процессоры'
 
-    def get_component_info(self):
-        return f"Процессор: {self.brand} {self.model}, Сокет: {self.socket}, Количество ядер: {self.cores}, Частота: {self.frequency} GHz, Цена: {self.price}$"
-
-
-
 
 class RAM(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
@@ -85,11 +61,6 @@ class RAM(models.Model):
     class Meta:
         verbose_name = 'Оперативная память'
         verbose_name_plural = 'Оперативная память'
-
-
-    def get_component_info(self):
-        return f"Оперативная память: {self.brand} {self.model}, Объем: {self.capacity} ГБ, Частота: {self.speed} MHz, Цена: {self.price}$"
-
 
 
 class SSD(models.Model):
@@ -112,11 +83,6 @@ class SSD(models.Model):
         verbose_name = 'SSD'
         verbose_name_plural = 'SSD'
 
-
-    def get_component_info(self):
-        return f"SSD: {self.brand} {self.model}, Объем: {self.capacity} ГБ, Интерфейс: {self.interface}, Скорость чтения/записи: {self.read_speed}/{self.write_speed} MB/s, Цена: {self.price}$"
-
-
 class HDD(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
     model = models.CharField(max_length=255, verbose_name='Модель')
@@ -133,11 +99,6 @@ class HDD(models.Model):
     class Meta:
         verbose_name = 'HDD'
         verbose_name_plural = 'HDD'
-
-
-    def get_component_info(self):
-        return f"HDD: {self.brand} {self.model}, Объем: {self.capacity} ГБ/ТБ, Интерфейс: {self.interface}, Скорость вращения: {self.speed} RPM, Цена: {self.price}$"
-
 
 class GraphicsCard(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
@@ -160,11 +121,6 @@ class GraphicsCard(models.Model):
         verbose_name = 'Видеокарта'
         verbose_name_plural = 'Видеокарты'
 
-
-    def get_component_info(self):
-        return f"Видеокарта: {self.brand} {self.model}, Видеопамять: {self.video_memory} ГБ, Интерфейс: {self.interface}, Количество ядер CUDA: {self.cuda_cores}, Цена: {self.price}$"
-
-
 class Cooler(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
     model = models.CharField(max_length=255, verbose_name='Модель')
@@ -185,10 +141,6 @@ class Cooler(models.Model):
         verbose_name = 'Кулер'
         verbose_name_plural = 'Кулеры'
 
-    def get_component_info(self):
-        return f"Кулер: {self.brand} {self.model}, Поддерживаемые сокеты: {self.socket_support}, Скорость вращения вентилятора: {self.fan_speed} RPM, Уровень шума: {self.noise_level} дБ, Цена: {self.price}$"
-
-
 class PowerSupply(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
     model = models.CharField(max_length=255, verbose_name='Модель')
@@ -205,12 +157,6 @@ class PowerSupply(models.Model):
     class Meta:
         verbose_name = 'Блок питания'
         verbose_name_plural = 'Блоки питания'
-
-    def get_component_info(self):
-        return f"Блок питания: {self.brand} {self.model}, Мощность: {self.power_output} Вт, Эффективность: {self.efficiency_rating}, Цена: {self.price}$"
-
-
-
 
 class ComputerCase(models.Model):
     brand = models.CharField(max_length=255, verbose_name='Бренд')
@@ -233,5 +179,3 @@ class ComputerCase(models.Model):
     class Meta:
         verbose_name = 'Корпус'
         verbose_name_plural = 'Корпусы'
-    def get_component_info(self):
-        return f"Корпус: {self.brand} {self.model}, Боковая панель: {self.side_panel}, Вентиляторы в комплекте: {self.included_fans}, Отсеки для накопителей: {self.drive_bays}, Цена: {self.price}$"

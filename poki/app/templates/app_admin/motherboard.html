@@ -91,6 +91,8 @@
             height: auto;
             margin-bottom: 10px;
         }
+
+
     </style>
 </head>
 <body>
@@ -98,7 +100,10 @@
     <div class="container">
         <p><a href="{% url 'start' %}" class="button top-left">HOME</a></p>
         <h1>Список материнских плат</h1>
-        <p><a href="{% url 'create' %}" class="button">Create Motherboard</a></p>
+            {% if request.user.is_staff %}
+                <p><a href="{% url 'create' %}" class="button">Create Motherboard</a></p>
+            {% endif %}
+
 
             {% if motherboards %}
                 <div class="motherboard">

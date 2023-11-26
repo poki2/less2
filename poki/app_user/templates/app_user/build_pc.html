@@ -71,63 +71,7 @@
     <label for="motherboard">Выберите материнскую плату:</label>
     <select name="motherboard" id="motherboard">
         {% for motherboard in motherboards %}
-            <option value="{{ motherboard.id }}">{{ motherboard.brand }} {{ motherboard.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="processor">Выберите Процессор:</label>
-    <select name="processor" id="processor">
-        {% for processor in processors %}
-            <option value="{{ processor.id }}">{{ processor.brand }} {{ processor.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="ram">Выберите Оперативную память:</label>
-    <select name="ram" id="ram">
-        {% for ram in rams %}
-            <option value="{{ ram.id }}">{{ ram.brand }} {{ ram.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="hdd">Выберите HDD:</label>
-    <select name="hdd" id="hdd">
-        {% for hdd in hdds %}
-            <option value="{{ hdd.id }}">{{ hdd.brand }} {{ hdd.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="ssd">Выберите SSD:</label>
-    <select name="ssd" id="ssd">
-        {% for ssd in ssds %}
-            <option value="{{ ssd.id }}">{{ ssd.brand }} {{ ssd.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="graphic_card">Выберите Видео карту:</label>
-    <select name="graphic_card" id="graphic_card">
-        {% for graphic_card in graphics_cards %}
-            <option value="{{ graphic_card.id }}">{{ graphic_card.brand }} {{ graphic_card.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="cooler">Выберите Кулера:</label>
-    <select name="cooler" id="cooler">
-        {% for cooler in coolers %}
-            <option value="{{ cooler.id }}">{{ cooler.brand }} {{ cooler.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="power_supplie">Выберите Блок питания:</label>
-    <select name="power_supplie" id="power_supplie">
-        {% for power_supplie in power_supplies %}
-            <option value="{{ power_supplie.id }}">{{ power_supplie.brand }} {{ power_supplie.model }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="computer_case">Выберите Кейс:</label>
-    <select name="computer_case" id="computer_case">
-        {% for computer_case in computer_cases %}
-            <option value="{{ computer_case.id }}">{{ computer_case.brand }} {{ computer_case.model }}</option>
+            <option value="{{ motherboard.id }}">Модель: {{ motherboard.model }} Цена: {{ motherboard.price }}$</option>
         {% endfor %}
     </select>
 

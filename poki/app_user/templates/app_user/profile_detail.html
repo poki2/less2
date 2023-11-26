@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motherboard Detail</title>
+    <title>Детали профиля пользователя</title>
     <style>
-       body {
+        body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -24,7 +24,7 @@
             padding: 20px 0;
         }
 
-        .details-container {
+        .profile-container {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -32,17 +32,17 @@
             text-align: center;
         }
 
-        .details-container img {
-            max-width: 100%;
-            border-radius: 8px;
+        .profile-container img {
+            max-width: 150px;
+            border-radius: 50%;
             margin-bottom: 15px;
         }
 
-        .details-container p {
+        .profile-container p {
             margin: 10px 0;
         }
 
-        .details-container a {
+        .profile-container a {
             display: inline-block;
             background: #1e90ff;
             color: #fff;
@@ -53,7 +53,7 @@
             transition: background 0.3s ease;
         }
 
-        .details-container a:hover {
+        .profile-container a:hover {
             background: #0056b3;
         }
     </style>
@@ -61,27 +61,18 @@
 <body>
 
 <div class="container">
-    <h2>Motherboard Detail</h2>
+    <h2>Детали профиля пользователя</h2>
 
-    <div class="details-container">
-        <img src="{{ motherboard.photo.url }}">
-        <p>Чипсет: {{ motherboard.chipset }}</p>
-        <p>Сокет: {{ motherboard.socket }}</p>
-        <p>Цена: ${{ motherboard.price }}</p>
-        {% if motherboard.in_stock %}
-            <p>В наличии</p>
-            <p><a href="#">Добавить в корзину</a></p>
-        {% else %}
-            <p>Нет в наличии</p>
-        {% endif %}
-        {% if request.user.is_staff %}
-            <p><a href="{% url 'delete' pk=motherboard.pk %}">DELETE</a></p>
-            <p><a href="{% url 'update' pk=motherboard.pk %}">UPDATE</a></p>
-        {% endif %}
+    <div class="profile-container">
+        <img src="{{ profiles.avatar.url }}">
+        <p>Имя пользователя: {{ profiles.username }}</p>
+        <p>Email: {{ profiles.user_email }}</p>
+
+
+
+        <p><a href="#">Редактировать профиль</a></p>
     </div>
 </div>
 
-
 </body>
 </html>
-
