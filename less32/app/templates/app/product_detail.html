@@ -1,0 +1,15 @@
+
+{% extends 'app/base.html' %}
+
+{% block content %}
+  <h1>{{ product.name }}</h1>
+  <p>Price: ${{ product.price }}</p>
+  <p>Seller: {{ product.seller }}</p>
+  <p>Quantity in Stock: {{ product.quantity_in_stock }}</p>
+  <p>Category: {{ product.get_category_display }}</p>
+  <p>Application Area: {{ product.get_application_area_display }}</p>
+  <p>Date Added: {{ product.date_added }}</p>
+  <p>Average Rating: {{ product.average_rating }}</p>
+
+
+{% endblock %}
